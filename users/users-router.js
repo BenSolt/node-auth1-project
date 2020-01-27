@@ -2,16 +2,16 @@ const router = require('express').Router();
 
 const Users = require('./users-model.js');
 
-router.get('/', (req, res) => {
-  Users.find()
-    .then(users => {
-      res.json(users);
-    })
-    .catch(err => res.send(err));
-});
+// router.get('/', (req, res) => {
+//   Users.find()
+//     .then(users => {
+//       res.json(users);
+//     })
+//     .catch(err => res.send(err));
+// });
 
 //GET USERS
-router.get('/users', (req, res,next) => {
+router.get('/', (req, res,next) => {
   //Users.find()
   if(req.headers.authorization) {
     bc.hash(req.headers.authorization), 8, (err, hash) => { 
