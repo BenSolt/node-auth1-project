@@ -1,13 +1,13 @@
 const router = require('express').Router();
 
-const authRouter = require('../auth/auth-router.js');
-const usersRouter = require('../users/users-router.js');
-
-router.use('/auth', authRouter);
-router.use('/users', usersRouter);
+const Users = require('./users-model.js');
 
 router.get('/', (req, res) => {
-  res.json({ api: "its working" });
+  Users.find()
+    .then(users => {
+      res.json(users);
+    })
+    .catch(err => res.send(err));
 });
 
 module.exports = router;

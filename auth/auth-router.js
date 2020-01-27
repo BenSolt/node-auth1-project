@@ -2,11 +2,13 @@ const router = require('express').Router();
 
 const Users = require('../users/users-model.js');
 
+
+
 //HASH HASH HASH - Authorization
 ////////////////////////
 router.get('/secret', (req, res,next) => {
   if(req.headers.authorization) {
-    bc.hash(req.headers.authorization), 10, (err, hash) => { 
+    bc.hash(req.headers.authorization), 8, (err, hash) => { 
       // 10 is number of rounds
       if (err) {
         res.status(500).json({error: ' it borke'});
