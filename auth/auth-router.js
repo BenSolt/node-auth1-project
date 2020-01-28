@@ -47,6 +47,7 @@ router.post('/login', (req, res) => {
     .first()
     .then(user => {
       if (user && bc.compareSync(password, user.password)) {
+        //sessions 
         req.session.loggedIn = true; // used in restricted middleware
         req.session.userId = user.id //user id
        // if (user) {
@@ -66,5 +67,25 @@ router.post('/login', (req, res) => {
       res.status(500).json(error);
     });
 });
+
+///LOGOUT - Part 2 - sessions and cookies
+router.get("/logout", (req, res) => {
+  if (req.session) {
+      req.session.destroy(err => {
+          if (err) {
+              res.status(500).json({
+                  message:
+                      " you can checkout but cant leave!",
+              });
+          } else {
+              res.status(200).json({ message: "bye, thank you, come again" });
+          }
+      });
+  } else {
+      res.status(204);
+  }
+});
+
+
 
 module.exports = router;
