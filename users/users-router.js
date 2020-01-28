@@ -2,7 +2,10 @@ const router = require('express').Router();
 
 const Users = require('./users-model.js');
 
-router.get('/', (req, res) => {
+//session and cookie
+const restricted = require('../auth/restricted-middleware');
+//added the word - restricted  after '/'
+router.get('/', restricted, (req, res) => {
   Users.find()
     .then(users => {
       res.json(users);
